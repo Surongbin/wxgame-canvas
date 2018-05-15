@@ -62,7 +62,6 @@ function initRanklist (list) {
     // itemCanvas.height = itemHeight * length;
     itemCanvas.width = (screenWidth - 40 * 2)*ratio;
     itemCanvas.height = (itemHeight * length)*ratio;
-    console.log(itemCanvas.width, itemCanvas.height);
     ctx.scale(ratio, ratio);
     // ctx.translate(0.5, 0.5);
 

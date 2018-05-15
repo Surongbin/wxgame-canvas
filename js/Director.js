@@ -40,12 +40,12 @@ export default class Director {
         this.offScreenCanvas.height = screenHeight * ratio;
         let questionCtx = this.offScreenCanvas.getContext('2d');
         questionCtx.scale(ratio, ratio);
-        questionCtx.translate(0.5, 0.5);
+
         DataStore.getInstance().offScreenCanvas = this.offScreenCanvas;
         ctx.clearRect(0, 0, screenWidth * ratio, screenHeight * ratio);
-        this.questionScene = new QuestionScene(ctx, Question.getInstance().currentList[this.currentIndex], this.currentIndex);
+        this.questionScene = new QuestionScene(questionCtx, Question.getInstance().currentList[this.currentIndex], this.currentIndex);
 
-        // ctx.drawImage(this.offScreenCanvas, 0, 0);
+        ctx.drawImage(this.offScreenCanvas, 0, 0, screenWidth, screenHeight);
     }
     // 问题场景
     nextQuestionScene () {
@@ -62,9 +62,15 @@ export default class Director {
     // 结果场景
     showResultScene () {
         // console.log('showResultScene');
-        // this.resultCanvas = wx.createCanvas();
-        // let resultCtx = this.resultCanvas.getContext('2d');
-        new ResultScene(DataStore.getInstance().ctx);
+        this.resultCanvas = wx.createCanvas();
+        let resultCtx = this.resultCanvas.getContext('2d');
+        this.resultCanvas.width = screenWidth * ratio;
+        this.resultCanvas.height = screenHeight * ratio;
+        resultCtx.scale(ratio, ratio);
+
+        new ResultScene(resultCtx);
+        DataStore.getInstance().ctx.drawImage(this.resultCanvas, 0, 0, screenWidth, screenHeight);
+        // new ResultScene(DataStore.getInstance().ctx);
 
         // setTimeout(() => {
         //     DataStore.getInstance().ctx.drawImage(this.resultCanvas, 0, 0, screenWidth, screenHeight);

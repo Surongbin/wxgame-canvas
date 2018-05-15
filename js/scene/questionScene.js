@@ -155,7 +155,7 @@ export default class QuestionPage{
     }
     // 重新绘制canvas 到主屏上
     reDrawCanvas() {
-        // DataStore.getInstance().ctx.drawImage(DataStore.getInstance().offScreenCanvas, 0, 0);
+        DataStore.getInstance().ctx.drawImage(DataStore.getInstance().offScreenCanvas, 0, 0, screenWidth, screenHeight);
     }
     addTouch(){
         let _this = this;
