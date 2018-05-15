@@ -10,9 +10,9 @@ export default class Main {
         this.canvas = canvas;
         this.ctx = this.canvas.getContext('2d');
         // 解决图片模糊问题
-        // canvas.width = screenWidth * ratio;
-        // canvas.height = screenHeight * ratio;
-        // this.ctx.scale(ratio,ratio);
+        canvas.width = screenWidth * ratio;
+        canvas.height = screenHeight * ratio;
+        this.ctx.scale(ratio,ratio);
         // this.ctx.translate(0.5, 0.5);
 
         let openDataContext = wx.getOpenDataContext();

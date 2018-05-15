@@ -4,6 +4,7 @@ let context = sharedCanvas.getContext('2d');
 const screenWidth = wx.getSystemInfoSync().screenWidth;
 const screenHeight = wx.getSystemInfoSync().screenHeight;
 const ratio = wx.getSystemInfoSync().pixelRatio;
+
 // sharedCanvas.width = screenWidth * ratio;
 // sharedCanvas.height = screenHeight * ratio;
 let itemCanvas = wx.createCanvas();
@@ -18,20 +19,12 @@ getUserInfo();
 // 初始化标题返回按钮等元素
 function initEle() {
     context.restore();
-    context.clearRect(0, 0, screenWidth * ratio, screenWidth * ratio);
-    // context.scale(ratio, ratio); // 缩放像素比，才能高清
-    // context.translate(0.5, 0.5);
+    context.clearRect(0, 0, screenWidth * ratio, screenHeight * ratio);
     context.scale(ratio, ratio);
-
     // 画背景
     context.fillStyle = 'rgba(0, 0, 0, 0.5)';
-    context.fillRect(0, 0, screenWidth * ratio, screenWidth * ratio);
+    context.fillRect(0, 0, screenWidth * ratio, screenHeight * ratio);
 
-    let scales = screenWidth / 750;
-    context.scale(scales, scales);
-    // ????
-    // let scales = screenWidth / 750;
-    // context.scale(scales, scales);
     // 画标题
     context.fillStyle = '#fff';
     context.font = '25px Arial';
@@ -39,7 +32,7 @@ function initEle() {
     context.fillText('好友排行榜', screenWidth / 2, 110);
 
     // 排名列表外框
-    context.fillStyle = '#302F30'
+    context.fillStyle = '#302F30';
     context.fillRect(40, 145, screenWidth - 40 * 2, 325);
 
     // 排行榜提示
@@ -49,7 +42,7 @@ function initEle() {
     context.fillText('每周一凌晨刷新', 50, 165);
 
     // 自己排名外框
-    context.fillStyle = '#302F30'
+    context.fillStyle = '#302F30';
     context.fillRect(40, 480, screenWidth - 40 * 2, 60);
 
     // 返回按钮
@@ -57,8 +50,7 @@ function initEle() {
     returnImage.src = 'images/return.png';
     returnImage.onload = () => {
         context.drawImage(returnImage, 40, 560, 50, 50);
-    }
-    // getFriendsRanking();
+    };
 }
 
 function initRanklist (list) {
@@ -66,8 +58,13 @@ function initRanklist (list) {
     let length = Math.max(list.length, 6);
     let itemHeight = 295/6;
 
-    itemCanvas.width = screenWidth - 40 * 2;
-    itemCanvas.height = itemHeight * length;
+    // itemCanvas.width = screenWidth - 40 * 2;
+    // itemCanvas.height = itemHeight * length;
+    itemCanvas.width = (screenWidth - 40 * 2)*ratio;
+    itemCanvas.height = (itemHeight * length)*ratio;
+    console.log(itemCanvas.width, itemCanvas.height);
+    ctx.scale(ratio, ratio);
+    // ctx.translate(0.5, 0.5);
 
     ctx.clearRect(0, 0, itemCanvas.width, itemCanvas.height);
 
@@ -137,7 +134,9 @@ function reDrawItem(y) {
     context.fillStyle = '#302F30';
     context.fillRect(40, 175, screenWidth - 40 * 2, 295);
     // 这里每次都绘制295都高，只显示6项
-    context.drawImage(itemCanvas, 0, y, screenWidth - 40 * 2, 295, 40, 175, screenWidth - 40 * 2, 295);
+    // context.drawImage(itemCanvas, 0, y, screenWidth - 40 * 2, 295, 40, 175, screenWidth - 40 * 2, 295);
+    //
+    context.drawImage(itemCanvas, 40, y+175, screenWidth - 40 * 2, 295);
 }
 function sortByScore (data) {
     let array = [];

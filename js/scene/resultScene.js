@@ -27,7 +27,8 @@ export default class ResultScene {
             this.messageSharecanvas('group', DataStore.getInstance().shareTicket);
         }
         if (this.ranking) {
-            this.ctx.drawImage(DataStore.getInstance().sharedCanvas, 0, 0);
+            // 子域canvas 放大绘制，这里必须限制子域画到上屏的宽高是screenWidth， screenHeight
+            this.ctx.drawImage(DataStore.getInstance().sharedCanvas, 0, 0, screenWidth, screenHeight);
         }
         this.requestId = requestAnimationFrame(this.loop.bind(this));
     }
