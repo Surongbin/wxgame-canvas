@@ -3,15 +3,20 @@ import {drawText} from '../utils/index.js';
 import Background from '../runtime/background';
 import Sprite from '../base/Sprite';
 import DataStore from "../base/DataStore";
+// 采用750的设计稿
 const screenWidth = window.innerWidth;
 const screenHeight = window.innerHeight;
-const CHOICE_WIDTH = 144;
-const CHOICE_HEIGHT = 44;
+const ratio = 750 / screenWidth;//wx.getSystemInfoSync().pixelRatio;
+const scale = 750 / screenWidth;
+
+const CHOICE_WIDTH = 288;
+const CHOICE_HEIGHT = 88;
 
 // 创建问题canvas, 离屏canvas
 export default class QuestionPage{
     constructor(ctx, question, index) {
-        this.background = new Background(ctx);
+        this.background = new Background(ctx, scale);
+
         this.question = question;
         this.index = index;
         this.ctx = ctx;
@@ -31,34 +36,35 @@ export default class QuestionPage{
     }
     drawProgress () {
         let barImg = Sprite.getImage('progress_bar');
-        let bar = new Sprite(barImg, (screenWidth - barImg.width/2)/2, 10, barImg.width/2, barImg.height/2);
+        let bar = new Sprite(barImg, (750 - barImg.width)/2, 20, barImg.width, barImg.height);
         bar.draw(this.ctx);
         let percent = (this.index+1)/10;
         // this.ctx.globalCompositeOperation = 'source-over';
         this.ctx.fillStyle = '#fed443';
-        this.ctx.fillRect(bar.x+2, bar.y+41, (bar.width-4)*percent, 8);
+        this.ctx.fillRect(bar.x+4, bar.y+82, (bar.width-8)*percent, 16);
         this.bar = bar;
     }
     drawPic() {
         let _this = this;
         let bgImg = Sprite.getImage('question_bg');
-        let bg = new Sprite(bgImg, (screenWidth - bgImg.width/2)/2, 10 + this.bar.height + 10, bgImg.width/2, bgImg.height/2);
+        this.offset = (750 - bgImg.width)/2;
+        let bg = new Sprite(bgImg, this.offset, 20 + this.bar.height + 20, bgImg.width, bgImg.height);
         bg.draw(this.ctx);
         this.bg = bg;
         let pic = new Image();
         pic.src = this.img;
         pic.onload = () => {
-            _this.centerImg(pic, bg.x + 10, bg.y + 10, bg.width-20, bg.height-20);
+            _this.centerImg(pic, bg.x + 20, bg.y + 20, bg.width-40, bg.height-40);
             _this.reDrawCanvas();
         }
     }
     drawTitle () {
-        drawText(this.title, this.bg.x, this.bg.y+this.bg.height+10, screenWidth-2*this.bg.x, this.ctx);
+        drawText(this.title, this.offset, this.bg.y+this.bg.height+20, 750-2*this.bg.x, this.ctx, ratio);
     }
     // 图片居中
-    centerImg(pic,x,y,limitW,limitH,ctx) {
-        let drawWidth = pic.width/2;
-        let drawHeight = pic.height/2;
+    centerImg(pic,x,y,limitW,limitH) {
+        let drawWidth = pic.width;
+        let drawHeight = pic.height;
         if(drawWidth/drawHeight>1){
             drawHeight = limitW * (drawHeight / drawWidth);
             drawWidth = limitW;
@@ -76,13 +82,15 @@ export default class QuestionPage{
         let chart = ['A', 'B', 'C', 'D'];
         let choiceBgImg = Sprite.getImage(bgsrc);
 
-        let x = index%2 === 0 ? this.bg.x : ((screenWidth-CHOICE_WIDTH)-20);
-        let y = index < 2 ? 450 : (470 + CHOICE_HEIGHT);
+        let x = index%2 === 0 ? this.offset : ((750-CHOICE_WIDTH)-this.offset);
+        this.firstY = this.bg.y + this.bg.height+20*ratio+90;
+        this.secondY = this.firstY + 20*ratio;
+        let y = index < 2 ? this.firstY : (this.secondY + CHOICE_HEIGHT);
         let choiceSprite = new Sprite(choiceBgImg, x , y, CHOICE_WIDTH, CHOICE_HEIGHT);
         choiceSprite.draw(this.ctx);
-        this.drawCircle(this.ctx, x + 20, y + 25, chart[index]);
+        this.drawCircle(this.ctx, x + 40, y + 50, chart[index]);
         this.ctx.fillStyle = '#654e01';
-        this.ctx.fillText(this.choices[index], x + 40, y + 25);
+        this.ctx.fillText(this.choices[index], x + 80, y + 50);
 
         if (bgsrc != 'select_bg') {
             callback && callback();
@@ -90,24 +98,25 @@ export default class QuestionPage{
         }
         // 选项的选择区域
         if (!this.selectArea) {
+            console.log(choiceSprite);
             this.selectArea = {
-                x: this.bg.x,
-                y: 450,
-                endX: screenWidth - this.bg.x,
-                endY: 470 + choiceSprite.height*2,
-                width: choiceSprite.width,
-                height: choiceSprite.height
+                x: choiceSprite.x/ratio,
+                y: choiceSprite.y/ratio,
+                endX: screenWidth - this.offset/ratio,
+                endY: this.firstY + (choiceSprite.height/ratio)*2+20,
+                width: choiceSprite.width/ratio,
+                height: choiceSprite.height/ratio
             }
         }
         if (index === 1) { // 记B选项的X坐标
-            this.selectArea.rightX = (screenWidth-choiceSprite.width)-20;
+            this.selectArea.rightX = (screenWidth-choiceSprite.width/ratio)-this.offset/ratio;
         }
         if (index === 2) { // 记C选项的Y坐标
-            this.selectArea.bottomY = 470 + choiceSprite.height;
+            this.selectArea.bottomY = this.secondY + choiceSprite.height/ratio;
         }
     }
     drawChoice(ctx) {
-        this.ctx.font = '12px Arial';
+        this.ctx.font = '24px Arial';
         for (let i = 0; i < 4; i++) {
             this.drawChoiceItem(i, 'select_bg');
         }
@@ -116,12 +125,13 @@ export default class QuestionPage{
         // ctx.fillStyle = !isGray?"#ecb020":"#bcb7a7";
         ctx.fillStyle = '#ecb020';
         ctx.beginPath();
-        ctx.arc(x, y, 10, 0, Math.PI * 2, true);
+        ctx.arc(x, y, 20, 0, Math.PI * 2, true);
         ctx.closePath();
         ctx.fill();
-        ctx.strokeStyle = "#654e01";
-        ctx.font = '12px Arial';
-        ctx.strokeText(text, x-4, y);
+        ctx.save();
+        ctx.fillStyle = "#654e01";
+        ctx.font = '24px Arial';
+        ctx.fillText(text, x-8, y);
     }
     // 判断答案是否正确
     judgeAnswer (x, y) {
@@ -135,7 +145,6 @@ export default class QuestionPage{
             this.selected = false;
             return;
         }
-
         if (index === this.answer) {
             DataStore.getInstance().score += 10;
             this.drawChoiceItem(index, 'select_right',this.reDrawCanvas);
@@ -159,16 +168,14 @@ export default class QuestionPage{
     }
     addTouch(){
         let _this = this;
-        // DataStore.getInstance().offScreenCanvas.removeEventListener('touchstart');
         wx.offTouchStart();
         wx.onTouchStart((e)=>{
             if (!this.selected
-                && e.touches[0].clientX >= _this.selectArea.x
+                &&e.touches[0].clientX >= _this.selectArea.x
                 && e.touches[0].clientX <= _this.selectArea.endX
                 && e.touches[0].clientY >= _this.selectArea.y
                 && e.touches[0].clientY <= _this.selectArea.endY){
                 this.selected = true;
-                // console.log('select');
                 _this.judgeAnswer(e.touches[0].clientX, e.touches[0].clientY);
             }
         });

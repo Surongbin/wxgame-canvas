@@ -13,7 +13,6 @@ export default class Main {
         canvas.width = screenWidth * ratio;
         canvas.height = screenHeight * ratio;
         this.ctx.scale(ratio,ratio);
-        // this.ctx.translate(0.5, 0.5);
 
         let openDataContext = wx.getOpenDataContext();
         let sharedCanvas = openDataContext.canvas;
@@ -53,8 +52,14 @@ export default class Main {
                 imageUrl: 'https://mtshop1.meitudata.com/5ad58b143a94621047.jpg',
                 query: 'key1=1&key2=2',
                 success: (res) => {
-                    let shareTicket = res.shareTickets[0];
-                    DataStore.getInstance().shareTicket = shareTicket;
+                    // 问题页面因为没有设置loop 绘制，分享完成后会黑屏，需要重新绘制canvas
+                    if (DataStore.getInstance().currentCanvas === 'questionCanvas') {
+                        DataStore.getInstance().ctx.drawImage(DataStore.getInstance().offScreenCanvas, 0, 0, screenWidth, screenHeight);
+                    }
+                    if (res.shareTickets) {
+                        let shareTicket = res.shareTickets[0];
+                        DataStore.getInstance().shareTicket = shareTicket;
+                    }
                 },
                 fail: (res) => {
 

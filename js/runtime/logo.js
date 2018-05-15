@@ -12,9 +12,9 @@ const screenHeight = window.innerHeight;
 // const BG_IMG_SRC   = 'images/bg.png';
 
 export default class Logo extends Sprite {
-    constructor (ctx) {
-        let logoImg = Sprite.getImage('logo');;
-        super(logoImg, 10, -10, logoImg.width / 2, logoImg.height /2);
+    constructor (ctx,scale) {
+        let logoImg = Sprite.getImage('logo');
+        super(logoImg, 10*scale, -10*scale, logoImg.width / 2*scale, logoImg.height /2*scale);
         this.draw(ctx);
     }
 }

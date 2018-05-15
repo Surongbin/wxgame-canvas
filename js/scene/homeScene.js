@@ -5,27 +5,12 @@ import Sprite from '../base/Sprite';
 // import {getAuthSettings, createUserInfoButton} from '../utils/auth.js';
 const screenWidth = window.innerWidth;
 const screenHeight = window.innerHeight;
-const ratio = wx.getSystemInfoSync().pixelRatio;
+
 
 export default class HomeScene {
   constructor(ctx) {
       this.ctx = ctx;
       this.canvas = DataStore.getInstance().canvas;
-      // this.canvas = wx.createCanvas();
-      // this.canvas.width = screenWidth * ratio;
-      // this.canvas.height = screenHeight * ratio;
-      // this.mainCtx = ctx;
-      // this.ctx = this.canvas.getContext('2d');
-      // this.ctx.scale(2,2);
-      // this.ctx.translate(0.5, 0.5);
-
-      // this.background = new Background(ctx);
-      // this.drawHomeEle();
-      // this.drawButton();
-
-      // ctx.drawImage(this.canvas, 0, 0);
-      // this.loop();
-      // this.bindEvent();
       this.loop();
   }
   drawHomeEle () {
@@ -48,6 +33,7 @@ export default class HomeScene {
       this.bindEvent();
   }
   loop () {
+        this.ctx.clearRect(0, 0, screenWidth, screenHeight);
         this.background = new Background(this.ctx);
         this.drawHomeEle();
         this.drawButton();
@@ -61,7 +47,7 @@ export default class HomeScene {
         }
         if (this.ranking) {
             // 子域canvas 放大绘制，这里必须限制子域画到上屏的宽高是screenWidth， screenHeight
-            this.ctx.drawImage(DataStore.getInstance().sharedCanvas, 0, 0, screenWidth, screenHeight);
+            DataStore.getInstance().ctx.drawImage(DataStore.getInstance().sharedCanvas, 0, 0, screenWidth, screenHeight);
         }
         this.requestId = requestAnimationFrame(this.loop.bind(this));
     }
@@ -83,6 +69,9 @@ export default class HomeScene {
             y = e.touches[0].clientY;
           if (x >= 40 && x <= 90 && y >= 560 && y <= 610) {// 返回按钮
               _this.ranking = false;
+              setTimeout(()=>{
+                  cancelAnimationFrame(_this.requestId);
+              }, 20);
           }
         }); 
         return;
@@ -102,6 +91,7 @@ export default class HomeScene {
               && y <= _this.rankSprite.y + _this.rankSprite.height) {
                 // 排行榜也应该是实时的，所以需要sharedCanvas 绘制新的排行榜
               _this.messageSharecanvas();
+              _this.loop();
               wx.offTouchStart(); // 在分享canvas还是会响应事件，所以先解除事件绑定
           }
       });

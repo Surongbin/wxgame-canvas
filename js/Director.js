@@ -21,10 +21,6 @@ export default class Director {
 
     run(ctx) {
         this.showHomeScene(ctx);
-        // if (DataStore.getInstance().shareTicket) {
-        //     this.messageSharecanvas();
-        //     DataStore.getInstance().ranking = true;
-        // }
         // this.showResultScene();
     }
     // 首页场景
@@ -39,13 +35,17 @@ export default class Director {
         this.offScreenCanvas.width = screenWidth * ratio;
         this.offScreenCanvas.height = screenHeight * ratio;
         let questionCtx = this.offScreenCanvas.getContext('2d');
+        // 按照 750设计稿绘制
         questionCtx.scale(ratio, ratio);
+        let scales = screenWidth / 750;
+        questionCtx.scale(scales, scales);
 
         DataStore.getInstance().offScreenCanvas = this.offScreenCanvas;
         ctx.clearRect(0, 0, screenWidth * ratio, screenHeight * ratio);
         this.questionScene = new QuestionScene(questionCtx, Question.getInstance().currentList[this.currentIndex], this.currentIndex);
 
         ctx.drawImage(this.offScreenCanvas, 0, 0, screenWidth, screenHeight);
+        DataStore.getInstance().currentCanvas = 'questionCanvas';
     }
     // 问题场景
     nextQuestionScene () {
@@ -61,19 +61,19 @@ export default class Director {
     }
     // 结果场景
     showResultScene () {
-        // console.log('showResultScene');
         this.resultCanvas = wx.createCanvas();
         let resultCtx = this.resultCanvas.getContext('2d');
         this.resultCanvas.width = screenWidth * ratio;
         this.resultCanvas.height = screenHeight * ratio;
+        let scales = screenWidth / 750;
         resultCtx.scale(ratio, ratio);
 
-        new ResultScene(resultCtx);
-        DataStore.getInstance().ctx.drawImage(this.resultCanvas, 0, 0, screenWidth, screenHeight);
-        // new ResultScene(DataStore.getInstance().ctx);
+        resultCtx.scale(scales, scales);
 
-        // setTimeout(() => {
-        //     DataStore.getInstance().ctx.drawImage(this.resultCanvas, 0, 0, screenWidth, screenHeight);
-        // }, 2000);
+        DataStore.getInstance().resultCanvas = this.resultCanvas;
+        new ResultScene(resultCtx);
+
+        // new ResultScene(DataStore.getInstance().ctx);
+        DataStore.getInstance().currentCanvas = 'resultCanvas';
     }
 }
