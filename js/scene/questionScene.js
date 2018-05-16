@@ -103,7 +103,7 @@ export default class QuestionPage{
                 x: choiceSprite.x/ratio,
                 y: choiceSprite.y/ratio,
                 endX: screenWidth - this.offset/ratio,
-                endY: this.firstY + (choiceSprite.height/ratio)*2+20,
+                endY: this.firstY/ratio + (choiceSprite.height/ratio)*2+20,
                 width: choiceSprite.width/ratio,
                 height: choiceSprite.height/ratio
             }
@@ -145,6 +145,7 @@ export default class QuestionPage{
             this.selected = false;
             return;
         }
+        console.log('select: ' + index);
         if (index === this.answer) {
             DataStore.getInstance().score += 10;
             this.drawChoiceItem(index, 'select_right',this.reDrawCanvas);
@@ -170,6 +171,7 @@ export default class QuestionPage{
         let _this = this;
         wx.offTouchStart();
         wx.onTouchStart((e)=>{
+            console.log(_this.selectArea.endY);
             if (!this.selected
                 &&e.touches[0].clientX >= _this.selectArea.x
                 && e.touches[0].clientX <= _this.selectArea.endX
