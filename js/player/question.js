@@ -3,9 +3,12 @@
  * 问题处理类
  */
 import {questionList} from '../data/questions.js'
+import ResourceLoader from "../base/ResourceLoader";
 export default class Question {
     constructor () {
         this.currentList = this.getQuestions();
+        debugger;
+        ResourceLoader.create(this.loaders);
     }
     static getInstance () {
         if (!Question.instance) {
@@ -15,19 +18,19 @@ export default class Question {
     }
     // 随机获取10个问题
     getQuestions() {
-        let questions = [];
-        let randoms = [];
+        let questions = [], randoms = [], loaders = [];
         let count = 0;
 
         while (count < 10) {
             let random = parseInt(Math.random() * questionList.length);
             if (randoms.indexOf(random) === -1) {
                 questions.push(questionList[random]);
+                loaders.push([random, questionList[random].pic]);
                 randoms.push(random);
                 count++;
             }
         }
-        console.log(questions);
+        this.loaders = loaders;
         return questions;
     }
 }

@@ -4,7 +4,7 @@ import DataStore from './js/base/DataStore';
 const screenWidth = window.innerWidth;
 const screenHeight = window.innerHeight;
 const ratio = wx.getSystemInfoSync().pixelRatio;
-console.log(ratio);
+
 export default class Main {
     constructor () {
         this.canvas = canvas;

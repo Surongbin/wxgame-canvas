@@ -1,8 +1,9 @@
 // 资源文件加载
 import {Resources} from './Resources.js';
 export default class ResourceLoader {
-	constructor () {
-	    this.map = new Map(Resources);
+	constructor (res = Resources) {
+	    debugger;
+	    this.map = new Map(res);
         for (let [key, value] of this.map) {
             const image = wx.createImage();
             image.src = value;
@@ -22,7 +23,7 @@ export default class ResourceLoader {
         }
     }
 
-    static create () {
-        return new ResourceLoader();
+    static create (res) {
+        return new ResourceLoader(res);
     }
 }

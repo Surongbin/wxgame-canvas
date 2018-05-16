@@ -21,6 +21,8 @@ export default class Director {
 
     run(ctx) {
         this.showHomeScene(ctx);
+        // 预加载问题图片，减少空白时间
+        Question.getInstance();
         // this.showResultScene();
     }
     // 首页场景
