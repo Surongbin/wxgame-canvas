@@ -6,8 +6,6 @@ import Sprite from '../base/Sprite'
 const screenWidth  = window.innerWidth;
 const screenHeight = window.innerHeight;
 
-const BG_IMG_SRC   = 'images/bg.png';
-
 export default class Background extends Sprite {
     constructor (ctx, scale = 1) {
         let bgImg = Sprite.getImage('background');

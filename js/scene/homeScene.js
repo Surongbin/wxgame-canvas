@@ -6,7 +6,6 @@ import Sprite from '../base/Sprite';
 const screenWidth = window.innerWidth;
 const screenHeight = window.innerHeight;
 
-
 export default class HomeScene {
   constructor(ctx) {
       this.ctx = ctx;
@@ -67,7 +66,8 @@ export default class HomeScene {
         wx.onTouchStart((e) => {
           let x = e.touches[0].clientX,
             y = e.touches[0].clientY;
-          if (x >= 40 && x <= 90 && y >= 560 && y <= 610) {// 返回按钮
+            let scale = screenWidth/750;
+          if (x >= 80*scale && x <= 180*scale && y >=1120*scale && y <= 12200*scale) {// 返回按钮
               _this.ranking = false;
               setTimeout(()=>{
                   cancelAnimationFrame(_this.requestId);

@@ -89,7 +89,8 @@ export default class ResultScene {
             wx.onTouchStart((e) => {
                 let x = e.touches[0].clientX,
                     y = e.touches[0].clientY;
-                if (x >= 40 && x <= 90 && y >= 560 && y <= 610) {// 返回按钮
+                let scale = screenWidth/750;
+                if (x >= 80*scale && x <= 180*scale && y >= 1120*scale && y <= 1220*scale) {// 返回按钮
                     _this.ranking = false;
                     setTimeout(()=>{
                         cancelAnimationFrame(_this.requestId);
