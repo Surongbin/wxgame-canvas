@@ -2,7 +2,6 @@
 import {Resources} from './Resources.js';
 export default class ResourceLoader {
 	constructor (res = Resources) {
-	    debugger;
 	    this.map = new Map(res);
         for (let [key, value] of this.map) {
             const image = wx.createImage();
