@@ -38,7 +38,7 @@ export default class QuestionPage{
         let barImg = Sprite.getImage('progress_bar');
         let bar = new Sprite(barImg, (750 - barImg.width)/2, 20, barImg.width, barImg.height);
         bar.draw(this.ctx);
-        let percent = (this.index+1)/10;
+        let percent = (this.index+1)/3;
         // this.ctx.globalCompositeOperation = 'source-over';
         this.ctx.fillStyle = '#fed443';
         this.ctx.fillRect(bar.x+4, bar.y+82, (bar.width-8)*percent, 16);

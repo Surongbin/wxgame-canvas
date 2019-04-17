@@ -51,7 +51,7 @@ export default class Director {
     }
     // 问题场景
     nextQuestionScene () {
-        if (this.currentIndex === 9) {
+        if (this.currentIndex === 2) {
             this.showResultScene();
             return;
         }

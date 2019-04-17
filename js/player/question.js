@@ -7,7 +7,7 @@ import ResourceLoader from "../base/ResourceLoader";
 export default class Question {
     constructor () {
         this.currentList = this.getQuestions();
-        debugger;
+        // debugger;
         ResourceLoader.create(this.loaders);
     }
     static getInstance () {
@@ -21,7 +21,7 @@ export default class Question {
         let questions = [], randoms = [], loaders = [];
         let count = 0;
 
-        while (count < 10) {
+        while (count < 3) {
             let random = parseInt(Math.random() * questionList.length);
             if (randoms.indexOf(random) === -1) {
                 questions.push(questionList[random]);

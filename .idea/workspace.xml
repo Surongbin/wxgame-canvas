@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1fbe6ed4-6bae-4c0b-9d29-d849b41ced56" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/player/question.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/player/question.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/scene/questionScene.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/scene/questionScene.js" afterDir="false" />
     </list>
     <ignored path="challenge.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,27 +23,75 @@
     <favorites_list name="challenge" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="9" column="57" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="57" />
+            <state>
+              <caret column="27" selection-start-column="27" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="749">
+              <caret line="37" column="5" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
               <folding>
-                <element signature="e#0#32#0" expanded="true" />
+                <element signature="e#0#54#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main.js">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/Director.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="12" column="29" lean-forward="true" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+            <state relative-caret-position="7">
+              <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
               <folding>
-                <element signature="e#0#54#0" expanded="true" />
+                <element signature="e#10#52#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/utils/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/scene/questionScene.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-638">
+              <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/js/player/question.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="506">
+              <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+              <folding>
+                <element signature="e#50#99#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/data/questions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2332">
+              <caret line="106" column="32" selection-start-line="106" selection-start-column="32" selection-end-line="106" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -62,6 +108,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>$PROJECT_DIR$</find>
+      <find>debugger</find>
+      <find>10</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -77,16 +125,16 @@
         <option value="$PROJECT_DIR$/src/myOpenDataContext/index.js" />
         <option value="$PROJECT_DIR$/js/runtime/logo.js" />
         <option value="$PROJECT_DIR$/js/utils/index.js" />
-        <option value="$PROJECT_DIR$/js/scene/questionScene.js" />
         <option value="$PROJECT_DIR$/game.js" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/js/runtime/background.js" />
         <option value="$PROJECT_DIR$/js/scene/homeScene.js" />
         <option value="$PROJECT_DIR$/js/scene/resultScene.js" />
-        <option value="$PROJECT_DIR$/js/player/question.js" />
         <option value="$PROJECT_DIR$/js/base/ResourceLoader.js" />
         <option value="$PROJECT_DIR$/js/Director.js" />
         <option value="$PROJECT_DIR$/main.js" />
+        <option value="$PROJECT_DIR$/js/player/question.js" />
+        <option value="$PROJECT_DIR$/js/scene/questionScene.js" />
       </list>
     </option>
   </component>
@@ -127,7 +175,37 @@
               <item name="wxgame-canvas" type="b2602c69:ProjectViewProjectNode" />
               <item name="wxgame-canvas" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wxgame-canvas" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wxgame-canvas" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
               <item name="libs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wxgame-canvas" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wxgame-canvas" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="player" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wxgame-canvas" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wxgame-canvas" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="runtime" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wxgame-canvas" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wxgame-canvas" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="scene" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wxgame-canvas" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wxgame-canvas" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="wxgame-canvas" type="b2602c69:ProjectViewProjectNode" />
@@ -204,14 +282,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82051000" />
+    <option name="totallyTimeSpent" value="82293000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="49" y="-4" width="1391" height="904" extended-state="6" />
-    <editor active="true" />
+    <frame x="49" y="-4" width="1317" height="772" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.52835053" visible="true" weight="0.1697147" />
-      <window_info id="Structure" order="1" sideWeight="0.4716495" side_tool="true" visible="true" weight="0.1697147" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.5263975" visible="true" weight="0.17942768" />
+      <window_info id="Structure" order="1" sideWeight="0.47360247" side_tool="true" visible="true" weight="0.17942768" />
       <window_info id="Favorites" order="2" sideWeight="0.30384615" side_tool="true" weight="0.24945135" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.16920944" />
@@ -261,9 +338,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/utils/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
-          <folding />
+        <state relative-caret-position="198">
+          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -302,16 +378,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/player/question.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="28" column="37" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
-          <folding>
-            <element signature="e#50#99#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/base/Resources.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
@@ -338,8 +404,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/data/questions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3102">
-          <caret line="141" column="11" selection-start-line="141" selection-start-column="8" selection-end-line="141" selection-end-column="11" />
+        <state relative-caret-position="2332">
+          <caret line="106" column="32" selection-start-line="106" selection-start-column="32" selection-end-line="106" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -352,8 +418,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/scene/questionScene.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3718">
-          <caret line="170" column="25" selection-start-line="170" selection-start-column="25" selection-end-line="170" selection-end-column="25" />
+        <state relative-caret-position="-638">
+          <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -371,8 +437,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/Director.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="28" column="25" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
+        <state relative-caret-position="7">
+          <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
           <folding>
             <element signature="e#10#52#0" expanded="true" />
           </folding>
@@ -428,20 +494,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" column="57" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
+        <state>
+          <caret column="27" selection-start-column="27" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="12" column="29" lean-forward="true" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+        <state relative-caret-position="749">
+          <caret line="37" column="5" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
           <folding>
             <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/player/question.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+          <folding>
+            <element signature="e#50#99#0" expanded="true" />
           </folding>
         </state>
       </provider>
