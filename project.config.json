@@ -8,8 +8,8 @@
 		"newFeature": true
 	},
 	"compileType": "game",
-	"libVersion": "2.0.1",
-	"appid": "wx406c7a10261868fd",
+	"libVersion": "2.6.5",
+	"appid": "wx6ac3f5090a6b99c5",
 	"projectname": "question_challenge",
 	"isGameTourist": true,
 	"condition": {

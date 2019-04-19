@@ -11,7 +11,7 @@ export const checkSession = () => {
     fail: res => {
         console.log('fail:'+res);
         login((userInfo) => {
-          
+
         });
     }
   })
@@ -98,8 +98,10 @@ export const createUserInfoButton = () => {
               borderRadius: 4
           }
       });
-      button.show();
+      // button.show();
       button.onTap((res) => {
-          DataStore.getInstance().userInfo = res;
+        console.log(`createUserInfoButton res: `, res)
+        console.log(`res ${res}`)
+        DataStore.getInstance().userInfo = res;
       });
 }
