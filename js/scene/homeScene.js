@@ -1,7 +1,8 @@
 import Background from '../runtime/background'
 import DataStore from '../base/DataStore';
 import Sprite from '../base/Sprite';
-// import {getAuthSettings, createUserInfoButton} from '../utils/auth.js';
+import { createUserInfoButton } from '../utils/auth.js';
+
 const screenWidth = window.innerWidth;
 const screenHeight = window.innerHeight;
 
@@ -113,11 +114,10 @@ export default class HomeScene {
     this.ctx.clearRect(0, 0, screenWidth, screenHeight);
     this.background = new Background(this.ctx);
     this.drawAvatar();
-    this.drawStartButton();
+    // this.drawStartButton();
     // console.log(DataStore.getInstance().userInfo);
     // if (!DataStore.getInstance().userInfo) {
-    //     createUserInfoButton();
-    // }
+    createUserInfoButton(this.ctx)
     if (DataStore.getInstance().shareTicket && !this.showGroup) {
       this.showGroup = true;
       this.messageSharecanvas('group', DataStore.getInstance().shareTicket);
