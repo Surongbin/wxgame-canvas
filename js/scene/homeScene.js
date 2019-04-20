@@ -148,6 +148,7 @@ export default class HomeScene {
           y = e.touches[0].clientY;
         let scale = screenWidth / 750;
         if (x >= 80 * scale && x <= 180 * scale && y >= 1120 * scale && y <= 12200 * scale) {// 返回按钮
+          console.log(`onTouchStart 1 return??`)
           _this.ranking = false;
           setTimeout(() => {
             cancelAnimationFrame(_this.requestId);
@@ -163,13 +164,35 @@ export default class HomeScene {
         && x <= _this.startSprite.x + _this.startSprite.width
         && y >= _this.startSprite.y
         && y <= _this.startSprite.y + _this.startSprite.height) {
+        console.log(`onTouchStart 2 toQuestionScene`)
         cancelAnimationFrame(_this.requestId);
-        DataStore.getInstance().director.toQuestionScene(_this.ctx);
+        if (!this.userInfo) {
+          let self = this;
+          // wx.authorize({
+          //   scope: 'scope.userInfo',
+          //   success: res => {
+          //     self.userInfo = res.userInfo;
+          //     console.log(`authorize`);
+          //     DataStore.getInstance().director.toQuestionScene(_this.ctx);
+          //   },
+          //   fail: res => {
+          //     // iOS 和 Android 对于拒绝授权的回调 errMsg 没有统一，需要做一下兼容处理
+          //     if (res.errMsg.indexOf('auth deny') > -1 || res.errMsg.indexOf('auth denied') > -1) {
+          //       // 处理用户拒绝授权的情况
+          //       console.log(`reject authorize`);
+          //
+          //     }
+          //   }
+          // })
+        } else {
+          DataStore.getInstance().director.toQuestionScene(_this.ctx);
+        }
       } else if (x >= _this.rankSprite.x
         && x <= _this.rankSprite.x + _this.rankSprite.width
         && y >= _this.rankSprite.y
         && y <= _this.rankSprite.y + _this.rankSprite.height) {
         // 排行榜也应该是实时的，所以需要sharedCanvas 绘制新的排行榜
+        console.log(`onTouchStart 3 messageSharecanvas`)
         _this.messageSharecanvas();
         _this.loop();
         wx.offTouchStart(); // 在分享canvas还是会响应事件，所以先解除事件绑定
