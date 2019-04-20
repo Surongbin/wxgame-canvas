@@ -10,10 +10,60 @@ export default class HomeScene {
     this.ctx = ctx;
     this.canvas = DataStore.getInstance().canvas;
     this.loop();
+    // this.drawAvatarAndStart();
+  }
+
+  drawAvatarAndStart = () => {
+    let self = this;
+    wx.getSetting({
+      success(res) {
+        let authSetting = res.authSetting;
+        if (authSetting['scope.userInfo'] === true) {
+          // 用户已授权，可以直接调用相关 API
+          wx.getUserInfo({
+            withCredentials: true,
+            success: (res) => {
+              self.userInfo = res.userInfo;
+              console.log(`getUserInfo success`, res.userInfo)
+              self.drawHomeEle()
+            },
+          });
+        } else if (authSetting['scope.userInfo'] === false) {
+          // 用户已拒绝授权，再调用相关 API 或者 wx.authorize 会失败，需要引导用户到设置页面打开授权开关
+          console.log('到设置页面打开授权开关');
+          wx.showModal({
+            title: '提示',
+            content: '请到设置页面打开授权开关',
+            showCancel: false,
+            confirmText: '知道了',
+            success: res => {
+            }
+          });
+        } else {
+          // 未询问过用户授权，调用相关 API 或者 wx.authorize 会弹窗询问用户
+          wx.authorize({
+            scope: 'scope.userInfo',
+            success: res => {
+              _this.dataStore.userInfo = res.userInfo;
+              // console.log(_this.dataStore.userInfo);
+            },
+            fail: res => {
+              // iOS 和 Android 对于拒绝授权的回调 errMsg 没有统一，需要做一下兼容处理
+              if (res.errMsg.indexOf('auth deny') > -1 || res.errMsg.indexOf('auth denied') > -1) {
+                // 处理用户拒绝授权的情况
+              }
+            }
+          })
+        }
+      }
+    })
   }
 
   drawHomeEle() {
-    this.homeEle = Sprite.getImage('blankavatar');
+    console.log(`drawHomeEle: `, this.userInfo.avatarUrl)
+    this.homeEle = new Image();
+    this.homeEle.src = this.userInfo.avatarUrl;
+    this.homeEle = Sprite.getImage('homepage');
     this.logoImg = Sprite.getImage('logo');
     this.homeImg = new Sprite(this.homeEle, screenWidth / 3, screenHeight / 4, screenWidth / 3, screenWidth / 3);
     this.homeImg.draw(this.ctx);
@@ -36,7 +86,7 @@ export default class HomeScene {
   loop() {
     this.ctx.clearRect(0, 0, screenWidth, screenHeight);
     this.background = new Background(this.ctx);
-    this.drawHomeEle();
+    // this.drawHomeEle();
     this.drawButton();
     // console.log(DataStore.getInstance().userInfo);
     // if (!DataStore.getInstance().userInfo) {
