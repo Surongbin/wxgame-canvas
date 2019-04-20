@@ -9,7 +9,7 @@ export default class HomeScene {
   constructor(ctx) {
     this.ctx = ctx;
     this.canvas = DataStore.getInstance().canvas;
-    this.loop();
+    // this.loop();
     this.getSettingAndDrawAvatarAndStartButton();
   }
 
@@ -25,13 +25,15 @@ export default class HomeScene {
             success: (res) => {
               self.userInfo = res.userInfo;
               console.log(`getUserInfo success`, res.userInfo)
-              self.drawAvatar()
-              self.drawStartButton()
+              // self.drawAvatar()
+              // self.drawStartButton()
+              self.loop()
             },
           });
         } else {
-          self.drawAvatar()
-          self.drawStartButton()
+          // self.drawAvatar()
+          // self.drawStartButton()
+          self.loop()
         }
         console.log(`authSetting['scope.userInfo']: `, authSetting['scope.userInfo'])
 
@@ -66,6 +68,9 @@ export default class HomeScene {
 
       }
     })
+
+    // self.drawAvatar()
+    // self.drawStartButton()
   }
 
   drawAvatar() {
@@ -104,10 +109,11 @@ export default class HomeScene {
   }
 
   loop() {
+    console.log(`loop`)
     this.ctx.clearRect(0, 0, screenWidth, screenHeight);
     this.background = new Background(this.ctx);
-    // this.drawAvatar();
-    // this.drawStartButton();
+    this.drawAvatar();
+    this.drawStartButton();
     // console.log(DataStore.getInstance().userInfo);
     // if (!DataStore.getInstance().userInfo) {
     //     createUserInfoButton();
