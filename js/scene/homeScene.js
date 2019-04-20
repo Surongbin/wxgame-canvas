@@ -60,6 +60,7 @@ export default class HomeScene {
   }
 
   drawHomeEle() {
+    let self = this;
     // this.homeEle = new Image();
     this.homeEle = wx.createImage();
     this.homeEle.src = this.userInfo.avatarUrl;
@@ -68,7 +69,9 @@ export default class HomeScene {
     this.logoImg = Sprite.getImage('logo');
     console.log(`logoImg: `, this.logoImg)
     this.homeImg = new Sprite(this.homeEle, screenWidth / 3, screenHeight / 4, screenWidth / 3, screenWidth / 3);
-    this.homeImg.draw(this.ctx);
+    this.homeEle.onload = function () {
+      self.homeImg.draw(self.ctx);
+    }
   }
 
   drawButton() {
