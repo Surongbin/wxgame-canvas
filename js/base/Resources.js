@@ -1,6 +1,7 @@
 export const Resources = [
   ['background', 'images/bg.png'],
   ['homepage', 'images/homepage.png'],
+  ['blank_avatar', 'images/blank-avatar.jpeg'],
   ['start_btn', 'images/start.png'],
   ['rank_btn', 'images/rank.png'],
   ['question_bg', 'images/question-bg.png'],

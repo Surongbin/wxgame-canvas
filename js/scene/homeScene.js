@@ -10,7 +10,7 @@ export default class HomeScene {
     this.ctx = ctx;
     this.canvas = DataStore.getInstance().canvas;
     this.loop();
-    // this.drawAvatarAndStart();
+    this.drawAvatarAndStart();
   }
 
   drawAvatarAndStart = () => {
@@ -60,11 +60,13 @@ export default class HomeScene {
   }
 
   drawHomeEle() {
-    console.log(`drawHomeEle: `, this.userInfo.avatarUrl)
-    this.homeEle = new Image();
-    this.homeEle.src = this.userInfo.avatarUrl;
-    this.homeEle = Sprite.getImage('homepage');
+    // this.homeEle.src = this.userInfo.avatarUrl;
+    // this.homeEle = new Image();
+    // this.homeEle = wx.createImage();
+    this.homeEle = Sprite.getImage('blank_avatar');
+    console.log(`homeEle: `, this.homeEle)
     this.logoImg = Sprite.getImage('logo');
+    console.log(`logoImg: `, this.logoImg)
     this.homeImg = new Sprite(this.homeEle, screenWidth / 3, screenHeight / 4, screenWidth / 3, screenWidth / 3);
     this.homeImg.draw(this.ctx);
   }
