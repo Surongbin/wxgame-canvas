@@ -60,10 +60,10 @@ export default class HomeScene {
   }
 
   drawHomeEle() {
-    // this.homeEle.src = this.userInfo.avatarUrl;
     // this.homeEle = new Image();
-    // this.homeEle = wx.createImage();
-    this.homeEle = Sprite.getImage('blank_avatar');
+    this.homeEle = wx.createImage();
+    this.homeEle.src = this.userInfo.avatarUrl;
+    // this.homeEle = Sprite.getImage('blank_avatar');
     console.log(`homeEle: `, this.homeEle)
     this.logoImg = Sprite.getImage('logo');
     console.log(`logoImg: `, this.logoImg)
@@ -102,7 +102,7 @@ export default class HomeScene {
       // 子域canvas 放大绘制，这里必须限制子域画到上屏的宽高是screenWidth， screenHeight
       DataStore.getInstance().ctx.drawImage(DataStore.getInstance().sharedCanvas, 0, 0, screenWidth, screenHeight);
     }
-    this.requestId = requestAnimationFrame(this.loop.bind(this));
+    // this.requestId = requestAnimationFrame(this.loop.bind(this));
   }
 
   messageSharecanvas(type, text) {
