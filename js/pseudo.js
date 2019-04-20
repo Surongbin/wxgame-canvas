@@ -1,11 +1,12 @@
-function drawAvatarAndStart() {
+function drawAvatar() {
   if (authed) { // wx.getSetting
-    save(userInfo)
     draw(userInfo)
   } else if (!authed || reject) {
     draw(blankInfo)
   }
-  draw(startButton)
+}
+
+function drawStartButton() {
 }
 
 function onClick() {

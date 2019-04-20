@@ -10,10 +10,10 @@ export default class HomeScene {
     this.ctx = ctx;
     this.canvas = DataStore.getInstance().canvas;
     this.loop();
-    this.drawAvatarAndStart();
+    this.getSettingAndDrawAvatarAndStartButton();
   }
 
-  drawAvatarAndStart = () => {
+  getSettingAndDrawAvatarAndStartButton = () => {
     let self = this;
     wx.getSetting({
       success(res) {
@@ -25,56 +25,71 @@ export default class HomeScene {
             success: (res) => {
               self.userInfo = res.userInfo;
               console.log(`getUserInfo success`, res.userInfo)
-              self.drawHomeEle()
+              self.drawAvatar()
+              self.drawStartButton()
             },
-          });
-        } else if (authSetting['scope.userInfo'] === false) {
-          // 用户已拒绝授权，再调用相关 API 或者 wx.authorize 会失败，需要引导用户到设置页面打开授权开关
-          console.log('到设置页面打开授权开关');
-          wx.showModal({
-            title: '提示',
-            content: '请到设置页面打开授权开关',
-            showCancel: false,
-            confirmText: '知道了',
-            success: res => {
-            }
           });
         } else {
-          // 未询问过用户授权，调用相关 API 或者 wx.authorize 会弹窗询问用户
-          wx.authorize({
-            scope: 'scope.userInfo',
-            success: res => {
-              _this.dataStore.userInfo = res.userInfo;
-              // console.log(_this.dataStore.userInfo);
-            },
-            fail: res => {
-              // iOS 和 Android 对于拒绝授权的回调 errMsg 没有统一，需要做一下兼容处理
-              if (res.errMsg.indexOf('auth deny') > -1 || res.errMsg.indexOf('auth denied') > -1) {
-                // 处理用户拒绝授权的情况
-              }
-            }
-          })
+          self.drawAvatar()
+          self.drawStartButton()
         }
+        console.log(`authSetting['scope.userInfo']: `, authSetting['scope.userInfo'])
+
+        // else if (authSetting['scope.userInfo'] === false) {
+        //   // 用户已拒绝授权，再调用相关 API 或者 wx.authorize 会失败，需要引导用户到设置页面打开授权开关
+        //   console.log('到设置页面打开授权开关');
+        //   // wx.showModal({
+        //   //   title: '提示',
+        //   //   content: '请到设置页面打开授权开关',
+        //   //   showCancel: false,
+        //   //   confirmText: '知道了',
+        //   //   success: res => {
+        //   //   }
+        //   // });
+        // } else {
+        //   // 未询问过用户授权，调用相关 API 或者 wx.authorize 会弹窗询问用户
+        //   wx.authorize({
+        //     scope: 'scope.userInfo',
+        //     success: res => {
+        //       _this.dataStore.userInfo = res.userInfo;
+        //       // console.log(_this.dataStore.userInfo);
+        //     },
+        //     fail: res => {
+        //       // iOS 和 Android 对于拒绝授权的回调 errMsg 没有统一，需要做一下兼容处理
+        //       if (res.errMsg.indexOf('auth deny') > -1 || res.errMsg.indexOf('auth denied') > -1) {
+        //         // 处理用户拒绝授权的情况
+        //       }
+        //     }
+        //   })
+        // }
+
+
       }
     })
   }
 
-  drawHomeEle() {
-    let self = this;
-    // this.homeEle = new Image();
-    this.homeEle = wx.createImage();
-    this.homeEle.src = this.userInfo.avatarUrl;
-    // this.homeEle = Sprite.getImage('blank_avatar');
+  drawAvatar() {
+    if (this.userInfo) {
+      let self = this;
+      this.homeEle = wx.createImage();
+      this.homeEle.src = this.userInfo.avatarUrl;
+      this.homeImg = new Sprite(this.homeEle, screenWidth / 3, screenHeight / 4, screenWidth / 3, screenWidth / 3);
+      this.homeEle.onload = function () {
+        self.homeImg.draw(self.ctx);
+      }
+    } else {
+      this.homeEle = Sprite.getImage('blank_avatar');
+      this.homeImg = new Sprite(this.homeEle, screenWidth / 3, screenHeight / 4, screenWidth / 3, screenWidth / 3);
+      this.homeImg.draw(this.ctx)
+    }
     console.log(`homeEle: `, this.homeEle)
     this.logoImg = Sprite.getImage('logo');
     console.log(`logoImg: `, this.logoImg)
-    this.homeImg = new Sprite(this.homeEle, screenWidth / 3, screenHeight / 4, screenWidth / 3, screenWidth / 3);
-    this.homeEle.onload = function () {
-      self.homeImg.draw(self.ctx);
-    }
+
+
   }
 
-  drawButton() {
+  drawStartButton() {
     this.btnImg = Sprite.getImage('start_btn');
     this.startSprite = new Sprite(this.btnImg, (screenWidth - this.btnImg.width / 2) / 2, screenHeight / 2,
       this.btnImg.width / 2, this.btnImg.height / 2);
@@ -91,8 +106,8 @@ export default class HomeScene {
   loop() {
     this.ctx.clearRect(0, 0, screenWidth, screenHeight);
     this.background = new Background(this.ctx);
-    // this.drawHomeEle();
-    this.drawButton();
+    // this.drawAvatar();
+    // this.drawStartButton();
     // console.log(DataStore.getInstance().userInfo);
     // if (!DataStore.getInstance().userInfo) {
     //     createUserInfoButton();
