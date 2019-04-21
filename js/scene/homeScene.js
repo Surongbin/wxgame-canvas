@@ -75,16 +75,17 @@ export default class HomeScene {
   }
 
   drawAvatar() {
-    if (this.userInfo) {
-      let self = this;
-      this.homeEle = wx.createImage();
-      this.homeEle.src = this.userInfo.avatarUrl;
-      this.homeImg = new Sprite(this.homeEle, screenWidth / 3, screenHeight / 4, screenWidth / 3, screenWidth / 3);
-      this.homeEle.onload = function () {
-        self.homeImg.draw(self.ctx);
-      }
-    } else {
-      this.homeEle = Sprite.getImage('blank_avatar');
+    // if (this.userInfo) {
+    //   let self = this;
+    //   this.homeEle = wx.createImage();
+    //   this.homeEle.src = this.userInfo.avatarUrl;
+    //   this.homeImg = new Sprite(this.homeEle, screenWidth / 3, screenHeight / 4, screenWidth / 3, screenWidth / 3);
+    //   this.homeEle.onload = function () {
+    //     self.homeImg.draw(self.ctx);
+    //   }
+    // } else
+    {
+      this.homeEle = Sprite.getImage(this.userInfo ? 'pfc_local' : 'blank_avatar');
       this.homeImg = new Sprite(this.homeEle, screenWidth / 3, screenHeight / 4, screenWidth / 3, screenWidth / 3);
       this.homeImg.draw(this.ctx)
     }
@@ -110,22 +111,20 @@ export default class HomeScene {
   }
 
   loop() {
-    console.log(`loop`)
+    // console.log(`loop`)
     this.ctx.clearRect(0, 0, screenWidth, screenHeight);
     this.background = new Background(this.ctx);
     this.drawAvatar();
     // this.drawStartButton();
-    // console.log(DataStore.getInstance().userInfo);
-    // if (!DataStore.getInstance().userInfo) {
     createUserInfoButton(this.ctx)
-    if (DataStore.getInstance().shareTicket && !this.showGroup) {
-      this.showGroup = true;
-      this.messageSharecanvas('group', DataStore.getInstance().shareTicket);
-    }
-    if (this.ranking) {
-      // 子域canvas 放大绘制，这里必须限制子域画到上屏的宽高是screenWidth， screenHeight
-      DataStore.getInstance().ctx.drawImage(DataStore.getInstance().sharedCanvas, 0, 0, screenWidth, screenHeight);
-    }
+    // if (DataStore.getInstance().shareTicket && !this.showGroup) {
+    //   this.showGroup = true;
+    //   this.messageSharecanvas('group', DataStore.getInstance().shareTicket);
+    // }
+    // if (this.ranking) {
+    //   // 子域canvas 放大绘制，这里必须限制子域画到上屏的宽高是screenWidth， screenHeight
+    //   DataStore.getInstance().ctx.drawImage(DataStore.getInstance().sharedCanvas, 0, 0, screenWidth, screenHeight);
+    // }
     // this.requestId = requestAnimationFrame(this.loop.bind(this));
   }
 
